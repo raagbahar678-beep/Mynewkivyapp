@@ -9,6 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
+
     steps:
       - name: Get project files
         uses: actions/checkout@v4
@@ -24,7 +25,16 @@ jobs:
       - name: Build APK
         run: |
           export PATH="$PWD/.venv/bin:$PATH"
-          .venv/bin/buildozer -v android debug
+          set -o pipefail
+          .venv/bin/buildozer -v android debug 2>&1 | tee build.log
+
+      - name: Save build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Build-Log
+          path: build.log
+          if-no-files-found: ignore
 
       - name: Save APK
         uses: actions/upload-artifact@v4
