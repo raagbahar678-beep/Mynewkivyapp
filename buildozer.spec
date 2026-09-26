@@ -16,7 +16,7 @@ source.dir = .
 source.include_exts = py,kv,png,jpg,jpeg,atlas,ttf,otf,json
 
 # (list) Application requirements
-requirements = python3,kivy
+requirements = python3,kivy,charset-normalizer
 
 # (str) Application version
 version = 0.1
