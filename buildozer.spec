@@ -16,7 +16,7 @@ source.dir = .
 source.include_exts = py,kv,png,jpg,jpeg,atlas,ttf,otf,json
 
 # (list) Application requirements
-requirements = python3,kivy,charset-normalizer
+requirements = python3,kivy
 
 # (str) Application version
 version = 0.1
@@ -37,7 +37,7 @@ android.minapi = 24
 android.ndk = 28c
 
 # (str) Android architecture(s)
-android.archs = arm64-v8a
+android.archs = armeabi-v7a
 
 # (bool) Accept Android SDK licenses automatically
 android.accept_sdk_license = True
