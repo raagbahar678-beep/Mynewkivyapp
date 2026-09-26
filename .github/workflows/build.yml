@@ -14,17 +14,25 @@ jobs:
       - name: Get project files
         uses: actions/checkout@v4
 
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
       - name: Install build tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip python3-venv autoconf libtool pkg-config zlib1g-dev libncurses-dev cmake libffi-dev libssl-dev build-essential
+          sudo apt-get install -y git zip unzip python3-pip python3-venv autoconf libtool pkg-config zlib1g-dev libncurses-dev cmake libffi-dev libssl-dev build-essential
           python3 -m venv --system-site-packages .venv
           .venv/bin/pip install --upgrade pip setuptools
           .venv/bin/pip install buildozer cython
 
       - name: Build APK
         run: |
-          export PATH="$PWD/.venv/bin:$PATH"
+          export JAVA_HOME="$JAVA_HOME_17_X64"
+          export PATH="$JAVA_HOME/bin:$PWD/.venv/bin:$PATH"
+          java -version
           set -o pipefail
           .venv/bin/buildozer -v android debug 2>&1 | tee build.log
 
